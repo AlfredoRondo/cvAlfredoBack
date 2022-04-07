@@ -1,5 +1,29 @@
-GET http://localhost:3000/
+GET http://localhost:3000/api/proyectos 
 
 ###
-GET http://localhost:3000/api/proyectos
+POST http://localhost:3000/api/proyectos 
+content-type: application/json
 
+{
+    "titulo": "Proyecto de prueba el ocaso oscuro",
+    "descripcion": "Esta es la descripcion",
+    "url": "http://www.google.es",
+    "cliente": "Google",
+    "urtl_cliente": "http://www.google.com/quien-somos"
+}
+
+###
+PUT http://localhost:3000/api/proyectos/624eeff5aa38c57454b5e54d
+content-type: application/json
+
+{
+    "titulo": "Proyecto lado oscuro Editado",
+    "descripcion": "Esta es la descripcion",
+    "url": "http://www.google.es",
+    "cliente": "Google",
+    "urtl_cliente": "http://www.google.com/quien-somos"
+}
+
+
+###
+DELETE http://localhost:3000/api/proyectos/624ee9286c9787b3e4bb7788

@@ -6,7 +6,11 @@ const Schema = mongoose.Schema;
 
 //Generamos el esquema para el proyecto
 let proyectoSchema = new Schema ({
-    titulo: String
+    titulo: String,
+    descripcion: String,
+    url: String,
+    cliente: String,
+    url_cliente: String
 });
 
 //exportar la llamada al metodo mongoose que es quien nos crea el modelo
