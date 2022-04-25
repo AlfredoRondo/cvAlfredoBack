@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 //definimos la estructura usamos la url local de mongobd
-const urlMongo = 'mongodb://localhost:27017/proyecto';
+const urlMongo = process.env.MONGO_URL;
 
 //añadimos la configuracion
 const config = {

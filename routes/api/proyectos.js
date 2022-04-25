@@ -1,29 +1,62 @@
 //Al ser un fichero manejador de rutas ponemos lo siguiente
 const router = require('express').Router();
-
 //uso del check y validation [check = peticiones de comprobación de errores si estan bien los datos devueltos] [con el reusult = refleja el resumen de todos los errores]
 const {check, validationResult} = require('express-validator');
-const proyecto = require('../../models/proyecto');
+//const proyecto = require('../../models/proyecto');
 
 //Importamos el modelo del proyecto
 const Proyecto = require('../../models/proyecto');
 
 router.get('/', async (req,res) => {
+    console.log(req.payload);
     //Esperamos que se carguen todos los proyectos y los recuperamos al hacer la petición a la base de datos
-    try{const proyectos = await Proyecto.find();
+    try{
+        const proyectos = await Proyecto.find({}).lean();
         //recibimos los proyectos
-        res.json(proyectos);
+       const arrMap = proyectos.map(proyecto =>{
+            if (proyecto.imagen){
+                console.log(proyecto.imagen.indexOf('/'));
+            }
+            let imagen = proyecto.imagen ? proyecto.imagen.substring(proyecto.imagen.indexOf('/')+1): '';
+            return {...proyecto, imagen: imagen}
+        });
+        res.json(arrMap);
     }catch(err){
         res.status(503).json({'error': err});//devolvemos el estado del programa es decir si hay error se reflejará aquí 
     }
 
 });
 
+router.get('/categoria/:categoria',async(req,res)=>{
+    try{
+        const proyectos = await Proyecto.find({categoria:req.params.categoria});
+        res.json(proyectos);
+    }catch(err){
+        res.status(503).json({'error': err});
+    }
+});
+
+//recuperar todos los proyectos desde un id del  proyecto
+router.get('/:idProyecto', async(req,res) => {
+    try{
+        const proyecto = await Proyecto.findById(req.params.idProyecto);
+        res.json(proyecto);
+    }catch(err){
+        res.status(503).json({'error': err});   
+    }
+});
+
 //Me creo la petición post comprobando enl erro al omitir el título
 router.post('/',[
-    check('titulo','El título debe incluirse en la petición longitud máxima 40 carácteres').exists().isLength({max: 40}),
-    check('descripcion','La descripción debe incluirse en la petición longitud máxima 400 caracteres').exists().isLength({max: 400}),
-    check('url','La url del proyecto debe estar correcta').isURL(),
+    check('titulo','El título debe incluirse en la petición longitud máxima 40 carácteres')
+    .exists()
+    .notEmpty()
+    .isLength({max: 40}),
+    check('descripcion','La descripción debe incluirse en la petición longitud máxima 400 caracteres')
+    .exists()
+    .notEmpty()
+    .isLength({max: 400}),
+    check('url','La url del proyecto debe estar correcta').isURL()
 ],async (req, res) => {
 
     const errors = validationResult(req);
@@ -47,9 +80,7 @@ router.put('/:proyectoId', async(req,res)=>{
     }catch (err){
         res.status(503).json({'error': err});
     }
-})
-
-
+});
 
 //Peticion para BORRAR información del proyecto 
 router.delete('/:proyectoId',async(req,res)=>{
@@ -59,7 +90,7 @@ router.delete('/:proyectoId',async(req,res)=>{
     }catch(err){
         res.status(503).json({'error': err});
     }
-})
+});
 
 //Exportamos la ruta
 module.exports = router;

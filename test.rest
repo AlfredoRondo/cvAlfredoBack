@@ -1,29 +1,47 @@
 GET http://localhost:3000/api/proyectos 
+access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiQWxmcmVkbyIsImNyZWF0ZWRBZCI6MTY1MDU0MTcyNiwiZXhwaXJlZEF0IjoxNjUwOTczNzI2fQ.dl54nZLX1mphfhZdrIDG25mlEOkhu_tWY-5UlvWAZgo
 
-###
-POST http://localhost:3000/api/proyectos 
+### recuperar un elemento por proyecto buscado por su id
+GET http://localhost:3000/api/proyectos/625e6e570bdda1ced3990840
+access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiQWxmcmVkbyIsImNyZWF0ZWRBZCI6MTY1MDU0MDg2NywiZXhwaXJlZEF0IjoxNjUwOTcyODY3fQ.CQjX3knPPuzsfbbB9MlPqbeQYYT_H9JUpga3L4cxz6Y
+
+### recuperar uno o varios elementos por proyecto buscado por su categoría
+GET http://localhost:3000/api/proyectos/categoria/wordpress
+access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiQWxmcmVkbyIsImNyZWF0ZWRBZCI6MTY1MDU0MTA4OSwiZXhwaXJlZEF0IjoxNjUwOTczMDg5fQ.U-nnN3QUw_-RxcpPMP89kXEsBMgGAM8IVzFe7EXBMHM
+
+
+### Introducir un nuevo proyecto
+POST http://localhost:3000/api/proyectos
 content-type: application/json
+access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiQWxmcmVkbyIsImNyZWF0ZWRBZCI6MTY1MDU0MTcyNiwiZXhwaXJlZEF0IjoxNjUwOTczNzI2fQ.dl54nZLX1mphfhZdrIDG25mlEOkhu_tWY-5UlvWAZgo
 
 {
-    "titulo": "Proyecto de prueba el ocaso oscuro",
+    "titulo": "CV Web",
+    "descripcion": "Alfredo 10 Min Programando",
+    "url": "http://www.google.es",
+    "cliente": "10 Min programando",
+    "urtl_cliente": "http://www.google.com/",
+    "categoria": "wordpress"
+}
+
+### Modificar proyectos
+PUT http://localhost:3000/api/proyectos/625e6e570bdda1ced3990840
+content-type: application/json
+access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoiQWxmcmVkbyIsImNyZWF0ZWRBZCI6MTY1MDU0MTY0MSwiZXhwaXJlZEF0IjoxNjUwOTczNjQxfQ.BVHKBNe-hTMqnKiHmohBAAERtCGByYIeEbLgOwp7Nzw
+
+{
+    "titulo": "Proyecto lado oscuro editado",
     "descripcion": "Esta es la descripcion",
     "url": "http://www.google.es",
     "cliente": "Google",
-    "urtl_cliente": "http://www.google.com/quien-somos"
-}
+    "urtl_cliente": "http://www.google.com/quien-somos",
+    "categoria": "nodejs"
 
-###
-PUT http://localhost:3000/api/proyectos/624eeff5aa38c57454b5e54d
-content-type: application/json
-
-{
-    "titulo": "Proyecto lado oscuro Editado",
-    "descripcion": "Esta es la descripcion",
-    "url": "http://www.google.es",
-    "cliente": "Google",
-    "urtl_cliente": "http://www.google.com/quien-somos"
 }
 
 
-###
+### Borrar un elemento del proyecto por su id
 DELETE http://localhost:3000/api/proyectos/624ee9286c9787b3e4bb7788
+
+### Generador de Token
+GET http://localhost:3000/api/token

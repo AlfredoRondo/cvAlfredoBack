@@ -10,7 +10,12 @@ let proyectoSchema = new Schema ({
     descripcion: String,
     url: String,
     cliente: String,
-    url_cliente: String
+    url_cliente: String, 
+    categoria: {
+        type: String,
+        enum:['angular','wordpress','nodejs','frontend','backend']
+    },
+    imagen: String
 });
 
 //exportar la llamada al metodo mongoose que es quien nos crea el modelo

@@ -1,0 +1,38 @@
+<h4>Crear nuevo proyecto</h4>
+<form action="/proyectos/create" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Título</label>
+        <input type="text" name="titulo" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>descripción</label>
+        <input type="text" name="descripcion" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Url</label>
+        <input type="text" name="url" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Cliente</label>
+        <input type="text" name="cliente" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Url Cliente</label>
+        <input type="text" name="url_cliente" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>CategorÍa</label>
+        <select type="text" name="categoria" class="form-control">
+            <option value="angular">Angular</option>
+            <option value="wordpress">Wordpress</option>
+            <option value="nodejs">Nodejs</option>
+            <option value="frontend">Frontend</option>
+            <option value="backend">Backend</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Imagen</label>
+        <input type="file" name="imagen">
+    </div>
+    <input type="submit" value="Enviar" class="btn btn-block btn-primary">
+</form>
