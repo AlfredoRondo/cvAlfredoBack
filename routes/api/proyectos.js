@@ -24,7 +24,6 @@ router.get('/', async (req,res) => {
     }catch(err){
         res.status(503).json({'error': err});//devolvemos el estado del programa es decir si hay error se reflejará aquí 
     }
-
 });
 
 router.get('/categoria/:categoria',async(req,res)=>{

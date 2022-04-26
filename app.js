@@ -9,7 +9,7 @@ require('dotenv').config();//llamada a la librería dotenv [Que permite acceder 
 require('./db');//enviamos la peticion
 
 const apiRouter = require('./routes/api');//Almacemanos en una constante la ruta de los proyectos
-//const proyectosRouter = require('./routes/proyectos');//dirección donde se alojan los proyectos
+const proyectosRouter = require('./routes/proyectos');//dirección donde se alojan los proyectos
 //const req = require('express/lib/request');
 
 //defino el motor de rutas  router template engine setup
@@ -23,21 +23,15 @@ app.set('view engine', '.hbs');
 
 //gestionamos las rutas de peticion de datos al servidor
 //usamos la conección
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
- //realizamos un render a la pagina de prueba
-app.get('/test',(req,res) => {
-  res.render('prueba');  
-});
-
-
-
 
 app.use('/api',apiRouter);//Este método lleva como mínimo dos parámetros son [la ruta, y la funcionan manejadora] //[Nos permite mandar una respuesta según la petición]
 //Si llega una peticion con proyectos lo enviamos a proyecotos
-//app.use('/proyectos', proyectosRouter);
+app.use('/proyectos', proyectosRouter);
 
 //Creamos la constante que permite la conexion con el puerto correspondiente
 const PORT = process.env.PORT || 3333;

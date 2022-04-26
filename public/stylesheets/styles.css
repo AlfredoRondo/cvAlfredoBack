@@ -2,13 +2,15 @@
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 10px 10px;
     align-items: center;
+    text-align: center;
+    margin: 10px;
 }
 
 .proyecto h4{
     background-color: wheat;
     width: 100%;
     padding: 5px 10px;
-    text-align: center;
-}
+    text-align: center; 
+} 
